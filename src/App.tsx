@@ -7,13 +7,47 @@ import Keyboard from "./components/Keyboard/Keyboard";
 
 function App() {
   const [, setSolution] = useState("");
-  const [guesses] = useState<string[]>(new Array(rows).fill(""));
+  const [guesses, setGuesses] = useState<string[]>(new Array(rows).fill(""));
+  const [currentWord, setCurrentWord] = useState("");
+  const [currentRow, setCurrentRow] = useState(0);
 
   const selectWord = () => setSolution(pickRandomWord);
 
-  const handleKeyDown = useCallback((e: KeyboardEvent) => {
-    console.log(e);
-  }, []);
+  const handleKeyDown = useCallback(
+    (e: KeyboardEvent) => {
+      const key = e.key.toLowerCase();
+      if (key === "backspace") {
+        if (currentWord.length) {
+          setCurrentWord((currentWord) => currentWord.slice(0, -1));
+        }
+        return;
+      }
+
+      if (key === "enter") {
+        if (currentWord.length === 5) {
+          setGuesses((guesses) =>
+            guesses.map((guess, idx) =>
+              idx === currentRow ? currentWord : guess
+            )
+          );
+          setCurrentRow((currentRow) => currentRow + 1);
+          setCurrentWord("");
+        }
+        return;
+      }
+
+      if (
+        key >= "a" &&
+        key <= "z" &&
+        key.length === 1 &&
+        currentWord.length < 5
+      ) {
+        setCurrentWord((currentWord) => currentWord + key.toUpperCase());
+        return;
+      }
+    },
+    [currentWord, currentRow]
+  );
 
   useEffect(() => {
     document.addEventListener("keydown", handleKeyDown);
@@ -27,7 +61,11 @@ function App() {
 
   return (
     <div className="App">
-      <Board guesses={guesses} />
+      <Board
+        guesses={guesses}
+        currentRow={currentRow}
+        currentWord={currentWord}
+      />
       <Keyboard />
     </div>
   );
