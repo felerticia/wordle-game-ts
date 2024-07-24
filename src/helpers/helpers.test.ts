@@ -1,4 +1,4 @@
-import { words } from "../constants/contants";
+import { words } from "../constants/constants";
 import { pickRandomWord } from "./helpers";
 
 describe("pickRandomWord", () => {
