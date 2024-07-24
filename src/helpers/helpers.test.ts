@@ -1,5 +1,5 @@
 import { words } from "../constants/constants";
-import { getFinishedWordClassNames, pickRandomWord } from "./helpers";
+import { getFinishedWordClassNames, merge, pickRandomWord } from "./helpers";
 
 describe("pickRandomWord", () => {
   it("should return a word from the words list", () => {
@@ -72,5 +72,49 @@ describe("getFinishedWordClassNames", () => {
       "semi-correct",
     ];
     expect(getFinishedWordClassNames(solution, word)).toEqual(result);
+  });
+});
+
+describe("merge", () => {
+  it("should return the merged string with unique letters when there are no duplicates", () => {
+    const letters = "abc";
+    const currentWord = "defgh";
+    const result = "abcdefgh";
+    expect(merge(letters, currentWord)).toBe(result);
+  });
+
+  it("should return the merged string with unique letters when there are duplicates in currentWord", () => {
+    const letters = "abc";
+    const currentWord = "defgd";
+    const result = "abcdefg";
+    expect(merge(letters, currentWord)).toBe(result);
+  });
+
+  it("should return the merged string with unique letters when there are duplicates in both letters and currentWord", () => {
+    const letters = "abc";
+    const currentWord = "cadef";
+    const result = "abcdef";
+    expect(merge(letters, currentWord)).toBe(result);
+  });
+
+  it("should return the original currentWord string when letters is empty", () => {
+    const letters = "";
+    const currentWord = "abcde";
+    const result = "abcde";
+    expect(merge(letters, currentWord)).toBe(result);
+  });
+
+  it("should handle completely duplicate letters and words correctly", () => {
+    const letters = "abc";
+    const currentWord = "abcde";
+    const result = "abcde";
+    expect(merge(letters, currentWord)).toBe(result);
+  });
+
+  it("should handle a mix of cases where letters and currentWord have overlapping characters", () => {
+    const letters = "xyz";
+    const currentWord = "yyzzz";
+    const result = "xyz";
+    expect(merge(letters, currentWord)).toBe(result);
   });
 });

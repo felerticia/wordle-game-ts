@@ -31,3 +31,20 @@ export const getFinishedWordClassNames = (solution: string, word: string) => {
 
   return result;
 };
+
+export const merge = (letters: string, currentWord: string) => {
+  return Array.from(new Set(letters + currentWord)).join("");
+};
+
+export const getKeyboardLetterClassName = (
+  letter: string,
+  solution: string,
+  guesses: string[]
+) => {
+  const ind = solution.indexOf(letter);
+  if (ind === -1) return "wrong";
+
+  if (guesses.find((guess) => guess[ind] === letter)) return "correct";
+
+  return "semi-correct";
+};

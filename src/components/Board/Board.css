@@ -20,12 +20,12 @@
   border: 1px solid var(--primary);
   border-radius: 7px;
 }
-.correct {
+div.correct {
   background: var(--correct);
 }
-.semi-correct {
+div.semi-correct {
   background: var(--semi-correct);
 }
-.wrong {
+div.wrong {
   background: var(--wrong);
 }
