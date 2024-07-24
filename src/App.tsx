@@ -15,8 +15,8 @@ function App() {
   const selectWord = () => setSolution(pickRandomWord);
 
   const handleKeyDown = useCallback(
-    (e: KeyboardEvent) => {
-      const key = e.key.toLowerCase();
+    (e: KeyboardEvent | string) => {
+      const key = typeof e === "string" ? e.toLowerCase() : e.key.toLowerCase();
       if (key === "backspace") {
         if (currentWord.length) {
           setCurrentWord((currentWord) => currentWord.slice(0, -1));
@@ -69,7 +69,12 @@ function App() {
         currentWord={currentWord}
         solution={solution}
       />
-      <Keyboard letters={letters} solution={solution} guesses={guesses} />
+      <Keyboard
+        letters={letters}
+        solution={solution}
+        guesses={guesses}
+        handleKeyDown={handleKeyDown}
+      />
     </div>
   );
 }

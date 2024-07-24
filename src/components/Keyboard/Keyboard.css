@@ -19,3 +19,6 @@
   background-color: var(--primary);
   border-radius: 7px;
 }
+.keyboard__letter:active {
+  box-shadow: 0px 0px 0px 3px var(--wrong), 0px 0px 6px 5px var(--wrong) inset;
+}
