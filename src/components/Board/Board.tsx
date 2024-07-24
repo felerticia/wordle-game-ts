@@ -5,14 +5,19 @@ type BoardProps = {
   guesses: string[];
   currentRow: number;
   currentWord: string;
+  solution: string;
 };
 
-const Board = ({ guesses, currentRow, currentWord }: BoardProps) => {
+const Board = ({ guesses, currentRow, currentWord, solution }: BoardProps) => {
   return (
     <div className="board">
       {guesses.map((_, rowIdx) => (
         <div key={rowIdx} className="board__row">
-          <Row word={currentRow === rowIdx ? currentWord : guesses[rowIdx]} />
+          <Row
+            isFinished={currentRow > rowIdx}
+            solution={solution}
+            word={currentRow === rowIdx ? currentWord : guesses[rowIdx]}
+          />
         </div>
       ))}
     </div>

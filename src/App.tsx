@@ -6,7 +6,7 @@ import Board from "./components/Board/Board";
 import Keyboard from "./components/Keyboard/Keyboard";
 
 function App() {
-  const [, setSolution] = useState("");
+  const [solution, setSolution] = useState("");
   const [guesses, setGuesses] = useState<string[]>(new Array(rows).fill(""));
   const [currentWord, setCurrentWord] = useState("");
   const [currentRow, setCurrentRow] = useState(0);
@@ -65,6 +65,7 @@ function App() {
         guesses={guesses}
         currentRow={currentRow}
         currentWord={currentWord}
+        solution={solution}
       />
       <Keyboard />
     </div>
