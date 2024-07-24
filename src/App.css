@@ -1,0 +1,12 @@
+:root {
+  --correct: #2ac55e;
+  --semi-correct: #eab306;
+  --wrong: #94a3b8;
+  --primary: #e2e8f0;
+}
+.App {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}

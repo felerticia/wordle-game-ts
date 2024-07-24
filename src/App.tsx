@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import { pickRandomWord } from "./helpers/helpers";
+import { rows } from "./constants/contants";
+import Board from "./components/Board/Board";
 
 function App() {
-  const [solution, setSolution] = useState("");
+  const [, setSolution] = useState("");
+  const [guesses] = useState<string[]>(new Array(rows).fill(""));
 
   const selectWord = () => setSolution(pickRandomWord);
 
@@ -11,7 +14,11 @@ function App() {
     selectWord();
   }, []);
 
-  return <div>{solution}</div>;
+  return (
+    <div className="App">
+      <Board guesses={guesses} />
+    </div>
+  );
 }
 
 export default App;

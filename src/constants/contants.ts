@@ -340,3 +340,5 @@ export const words = [
   "REBUT",
   "CIGAR",
 ];
+
+export const rows = 6;
